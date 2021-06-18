@@ -12,7 +12,7 @@ import IndexPagePreview from './preview-templates/IndexPagePreview'
 // CMS.registerMediaLibrary(uploadcare)
 // CMS.registerMediaLibrary(cloudinary)
 
-CMS.registerLocale('de', de);
+CMS.registerLocale('en', en);
 CMS.registerPreviewTemplate('index', IndexPagePreview)
 CMS.registerPreviewTemplate('about', AboutPagePreview)
 CMS.registerPreviewTemplate('products', ProductPagePreview)

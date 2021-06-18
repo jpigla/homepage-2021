@@ -15,7 +15,7 @@ site_url: https://www.jpigla.de/
 display_url: https://www.jpigla.de/
 logo_url: https://www.jpigla.de/img/philipp_clubhouse_1.png
 
-locale: 'de'
+locale: 'en'
 
 slug:
   encoding: "ascii"
