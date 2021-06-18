@@ -8,15 +8,27 @@ backend:
     uploadMedia: '[skip ci] Upload “{{path}}”'
     deleteMedia: '[skip ci] Delete “{{path}}”'
 
-media_folder: static/img
-public_folder: /img
+publish_mode: editorial_workflow
+media_folder: assets/uploads
+public_folder: /uploads
+site_url: https://www.jpigla.de/
+display_url: https://www.jpigla.de/
+logo_url: https://www.jpigla.de/img/philipp_clubhouse_1.png
+
+locale: 'de'
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
 
 collections:
   - name: "blog"
     label: "Blog"
     folder: "src/pages/blog"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    # slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
       - {label: "Title", name: "title", widget: "string"}
@@ -64,3 +76,48 @@ collections:
           - {label: Testimonials, name: testimonials, widget: list, fields: [{label: Quote, name: quote, widget: string}, {label: Author, name: author, widget: string}]}
           - {label: Full_image, name: full_image, widget: image}
           - {label: Pricing, name: pricing, widget: object, fields: [{label: Heading, name: heading, widget: string}, {label: Description, name: description, widget: string}, {label: Plans, name: plans, widget: list, fields: [{label: Plan, name: plan, widget: string}, {label: Price, name: price, widget: string}, {label: Description, name: description, widget: string}, {label: Items, name: items, widget: list}]}]}
+
+  - name: 'settings'
+    label: 'Settings'
+    delete: false # Prevent users from deleting documents in this collection
+    editor:
+      preview: false
+    files:
+      - name: 'general'
+        label: 'Site Settings'
+        file: '_data/settings.json'
+        description: 'General Site Settings'
+        fields:
+          - { label: 'Global title', name: 'site_title', widget: 'string' }
+          - label: 'Post Settings'
+            name: posts
+            widget: 'object'
+            fields:
+              - {
+                  label: 'Number of posts on frontpage',
+                  name: front_limit,
+                  widget: number,
+                  min: 1,
+                  max: 10,
+                }
+              - { label: 'Default Author', name: author, widget: string }
+              - {
+                  label: 'Default Thumbnail',
+                  name: thumb,
+                  widget: image,
+                  class: 'thumb',
+                  required: false,
+                }
+
+      - name: 'authors'
+        label: 'Authors'
+        file: '_data/authors.yml'
+        description: 'Author descriptions'
+        fields:
+          - name: authors
+            label: Authors
+            label_singular: 'Author'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string', hint: 'First and Last' }
+              - { label: 'Description', name: 'description', widget: 'markdown' }
